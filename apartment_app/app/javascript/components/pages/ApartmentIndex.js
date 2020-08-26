@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { Container, Card, CardTitle, Col } from 'reactstrap'
+import { Container, Card, CardTitle, Col, Row} from 'reactstrap'
 import { NavLink } from 'react-router-dom'
 class ApartmentIndex extends React.Component {
   render() {
@@ -21,21 +21,24 @@ class ApartmentIndex extends React.Component {
         <Container>
         <h2>All Apartments</h2>
         <br />
-        <Col sm="6">
-          { this.props.apartments.map((apartment, index) => {
-            return (
-              <Card body key={ index }>
-                <CardTitle>
-                  <h6>{ apartment.bedrooms } bd / { apartment.bathrooms } ba apartment in {apartment.city}, {apartment.state}
-                  <br/> ${ apartment.price } </h6>
-                  <NavLink to= {`/show/${apartment.id}`} >
-                  See Details
-                  </NavLink>
-                </CardTitle>
-              </Card>
-            )
-          })}
-        </Col>
+        <Row id="cards">
+            { this.props.apartments.map((apartment, index) => {
+              return (
+              <Col>
+                <Card body key={ index }>
+                  <CardTitle>
+                    <h6>{ apartment.bedrooms } bd / { apartment.bathrooms } ba apartment in {apartment.city}, {apartment.state}
+                    <br/> ${ apartment.price } </h6>
+                    <NavLink to= {`/show/${apartment.id}`} >
+                    See Details
+                    </NavLink>
+                  </CardTitle>
+                </Card>
+              </Col>
+              )
+            })}
+
+        </Row>
         </Container>
         <Footer />
       </React.Fragment>

@@ -11,15 +11,33 @@ import ApartmentShow from './pages/ApartmentShow'
 import ApartmentNew from './pages/ApartmentNew'
 import ApartmentEdit from './pages/ApartmentEdit'
 import NotFound from './pages/NotFound'
-import mockApts from './mockApartments.js'
+//import mockApts from './mockApartments.js'
 
 class App extends React.Component {
 
   constructor(props){
     super(props)
     this.state = {
-        apartments: mockApts
+        apartments: []
     }
+
+}
+
+componentDidMount(){
+  fetch("/apartments").then(response => {
+      if(response.status === 200){
+          return(response.json())
+      }
+  }).then(apartmentsArray => {
+      this.setState({ apartments: apartmentsArray })
+  }).catch(errors => {
+      console.log("index errors", errors)
+  })
+}
+
+createNewApartment = (newApartment) => {
+  
+      console.log("create new apartment", newApartment)
 
 }
   render() {
@@ -69,19 +87,32 @@ class App extends React.Component {
                 logged_in = {logged_in}
                 sign_in_route = {sign_in_route}
                 sign_out_route = {sign_out_route} 
+                createNewApartment = {this.createNewApartment}
               />
             }  
           />
-          <Route exact path='/edit' 
-            render = { (props) =>
+          <Route exact path='/edit/:id' 
+            render = { (props) => {
+              let id = props.match.params.id
+              let apartment = this.state.apartments.find(value => value.id === parseInt(id))
+              return (
               <ApartmentEdit 
                 logged_in = {logged_in}
                 sign_in_route = {sign_in_route}
                 sign_out_route = {sign_out_route} 
-              />
-            } 
+                apartment  = {apartment} 
+              />)
+            }} 
           />
-          <Route component={ NotFound }/>
+          <Route
+          render = { (props) =>
+            <NotFound 
+              logged_in = {logged_in}
+              sign_in_route = {sign_in_route}
+              sign_out_route = {sign_out_route} 
+            />
+          }
+          />
         </Switch>
 
 

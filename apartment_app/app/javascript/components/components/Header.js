@@ -42,12 +42,19 @@ class Header extends React.Component {
                 <NavItem>
                     <NavLink to= {`/index`}>Show All Apartments</NavLink>
                 </NavItem>
-                <NavItem>
-                    <NavLink to= {`/create`}>Add An Apartments</NavLink>
-                </NavItem>
-                 <NavItem>
-                    { logged_in && <a href={sign_out_route}>Sign Out</a>}
-                </NavItem>
+                { logged_in && 
+                <>
+                    <NavItem>
+                        <a href= {`/create`}>Add An Apartment</a>
+                    </NavItem>
+                    <NavItem>
+                        <a href= {`/show`}>My Apartments</a>
+                    </NavItem>
+                    <NavItem>
+                    <a href={sign_out_route}>Sign Out</a>
+                    </NavItem>
+                </>
+                }
                 <NavItem>
                     { !logged_in && <a href={sign_in_route}>Sign In</a>}
                 </NavItem>
