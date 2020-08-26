@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Header from '../components/Header.js'
 import Footer from '../components/Footer.js'
+import { Container, Card, CardTitle, CardText, Col } from 'reactstrap'
+
 import {Form, FormGroup, Input, Label, Button} from 'reactstrap'
 import { Redirect } from 'react-router-dom'
 
@@ -18,7 +20,10 @@ class ApartmentEdit extends React.Component {
             sign_in_route = { sign_in_route }
             sign_out_route = { sign_out_route }
           />
+          <Container>
           <h2>Edit Apartment Page</h2>
+
+          </Container>
           <Footer />
         </React.Fragment>
       )

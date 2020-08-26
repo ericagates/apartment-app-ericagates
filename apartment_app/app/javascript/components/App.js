@@ -32,7 +32,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route exact path='/' 
-            render = { (prop) =>
+            render = { (props) =>
               <Home 
                 logged_in = {logged_in}
                 sign_in_route = {sign_in_route}
@@ -41,7 +41,7 @@ class App extends React.Component {
             } 
           />
           <Route exact path='/index' 
-            render = { (prop) =>
+            render = { (props) =>
               <ApartmentIndex 
                 logged_in = {logged_in}
                 sign_in_route = {sign_in_route}
@@ -51,16 +51,20 @@ class App extends React.Component {
             } 
           />
           <Route exact path='/show/:id' 
-            render = { (prop) =>
+            render = { (props) => {
+              let id = props.match.params.id
+              let apartment = this.state.apartments.find(value => value.id === parseInt(id))
+              return (
               <ApartmentShow
                 logged_in = {logged_in}
                 sign_in_route = {sign_in_route}
-                sign_out_route = {sign_out_route} 
-              />
-            }
+                sign_out_route = {sign_out_route}
+                apartment  = {apartment} 
+              />)
+            }}
           />
           <Route exact path='/create' 
-            render = { (prop) =>
+            render = { (props) =>
               <ApartmentNew 
                 logged_in = {logged_in}
                 sign_in_route = {sign_in_route}
@@ -69,7 +73,7 @@ class App extends React.Component {
             }  
           />
           <Route exact path='/edit' 
-            render = { (prop) =>
+            render = { (props) =>
               <ApartmentEdit 
                 logged_in = {logged_in}
                 sign_in_route = {sign_in_route}
