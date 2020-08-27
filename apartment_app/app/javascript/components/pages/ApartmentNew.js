@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Header from '../components/Header.js'
 import Footer from '../components/Footer.js'
 import {Form, FormGroup, Input, Label, Button} from 'reactstrap'
-import { Container, Card, CardTitle, CardText, Col, Row } from 'reactstrap'
+import { Container, Col, Row } from 'reactstrap'
 
 import { Redirect } from 'react-router-dom'
 
@@ -19,7 +19,8 @@ class ApartmentNew extends React.Component {
             price:"",
             bedrooms:"",
             bathrooms:"",
-            pets:""
+            pets:"",
+            user_id: this.props.current_user.id
         },
         success: false
     }
@@ -43,7 +44,8 @@ class ApartmentNew extends React.Component {
       const {
         logged_in,
         sign_in_route,
-        sign_out_route
+        sign_out_route,
+        current_user
       } = this.props
       return (
         <React.Fragment>
@@ -53,7 +55,7 @@ class ApartmentNew extends React.Component {
             sign_out_route = { sign_out_route }
           />
           <Container>
-          <h2>Add An Apartment</h2>
+          <h2>Add A New Apartment</h2>
           <Form>
                 <FormGroup>
                     <Label>Street</Label>
@@ -163,12 +165,14 @@ class ApartmentNew extends React.Component {
                 <Button 
                 name="submit"
                 color = "secondary"
+                onClick = {this.handleSubmit}
                 >
                   Submit
                 </Button>
             </Form>
           </Container>
           <Footer />
+          { this.state.success && <Redirect to = "/index" /> }
         </React.Fragment>
       )
     }

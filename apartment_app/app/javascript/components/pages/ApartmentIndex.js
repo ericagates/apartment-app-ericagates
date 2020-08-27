@@ -19,13 +19,13 @@ class ApartmentIndex extends React.Component {
           sign_out_route = { sign_out_route }
         />
         <Container>
-        <h2>All Apartments</h2>
+        <h3>{this.props.title}</h3>
         <br />
         <Row id="cards">
             { this.props.apartments.map((apartment, index) => {
               return (
-              <Col>
-                <Card body key={ index }>
+              <Col className = "m-2"key={ index }>
+                <Card body >
                   <CardTitle>
                     <h6>{ apartment.bedrooms } bd / { apartment.bathrooms } ba apartment in {apartment.city}, {apartment.state}
                     <br/> ${ apartment.price } </h6>

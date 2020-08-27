@@ -37,14 +37,29 @@ componentDidMount(){
 
 createNewApartment = (newApartment) => {
   
-      console.log("create new apartment", newApartment)
-
+  return fetch("/apartments", {
+    body: JSON.stringify(newApartment),
+    headers: { "Content-Type": "application/json" },
+    method: "POST"
+    }).then(response => {
+    if(response.status === 200){
+        this.componentDidMount()
+    } else {
+        alert("Please check your form")
+    }
+    return response
+    }).catch(errors => {
+    console.log("create errors", errors)
+})
 }
+
+
   render() {
     const {
       logged_in,
       sign_in_route,
-      sign_out_route
+      sign_out_route,
+      current_user
     } = this.props
     return (
       <Router>
@@ -65,6 +80,7 @@ createNewApartment = (newApartment) => {
                 sign_in_route = {sign_in_route}
                 sign_out_route = {sign_out_route} 
                 apartments={ this.state.apartments }
+                title = "All Apartments"
               />
             } 
           />
@@ -88,8 +104,25 @@ createNewApartment = (newApartment) => {
                 sign_in_route = {sign_in_route}
                 sign_out_route = {sign_out_route} 
                 createNewApartment = {this.createNewApartment}
+                current_user = {current_user}
               />
             }  
+          />
+          <Route exact path='/myapartments' 
+            render = { (props) => {
+              let id = current_user.id
+              let myApartments = this.state.apartments.filter(value => value.user_id === id)
+              return(   
+              <>         
+                <ApartmentIndex 
+                logged_in = {logged_in}
+                sign_in_route = {sign_in_route}
+                sign_out_route = {sign_out_route} 
+                apartments={ myApartments }
+                title = "My Listed Apartments"
+              />
+              </>
+              )} }
           />
           <Route exact path='/edit/:id' 
             render = { (props) => {
@@ -100,7 +133,8 @@ createNewApartment = (newApartment) => {
                 logged_in = {logged_in}
                 sign_in_route = {sign_in_route}
                 sign_out_route = {sign_out_route} 
-                apartment  = {apartment} 
+                apartment  = {apartment}
+                current_user = {current_user}
               />)
             }} 
           />

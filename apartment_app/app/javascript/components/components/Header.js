@@ -48,7 +48,7 @@ class Header extends React.Component {
                         <a href= {`/create`}>Add An Apartment</a>
                     </NavItem>
                     <NavItem>
-                        <a href= {`/show`}>My Apartments</a>
+                        <a href= {`/myapartments`}>My Apartments</a>
                     </NavItem>
                     <NavItem>
                     <a href={sign_out_route}>Sign Out</a>

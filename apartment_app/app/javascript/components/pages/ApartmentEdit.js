@@ -29,7 +29,8 @@ class ApartmentEdit extends React.Component {
       const {
         logged_in,
         sign_in_route,
-        sign_out_route
+        sign_out_route,
+        current_user
       } = this.props
       return (
         <React.Fragment>

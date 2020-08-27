@@ -29,25 +29,18 @@ class ApartmentShow extends React.Component {
             <br/>
             City: { this.props.apartment.city }
             <br/>
-
             State: { this.props.apartment.state }
             <br/>
-
             Manager: { this.props.apartment.manager }
             <br/>
-
             Email: { this.props.apartment.email }
             <br/>
-
             Price: { this.props.apartment.price }
             <br/>
-
             Bedrooms: { this.props.apartment.bedrooms }
             <br/>
-
             Bathrooms: { this.props.apartment.bathrooms }
             <br/>
-
             Allows pets: { this.props.apartment.pets}
             </CardText>
           </Card>
