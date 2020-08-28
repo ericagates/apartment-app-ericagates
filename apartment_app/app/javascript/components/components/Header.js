@@ -35,7 +35,7 @@ class Header extends React.Component {
                 <NavbarBrand href="/" className="mr-auto">Apartment App</NavbarBrand>
                 <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                 <Collapse isOpen={!collapsed} navbar>
-                <Nav navbar className="text-right">
+                <Nav navbar className="text-right p-2">
                 <NavItem>
                     <NavLink to= {`/`}>Home</NavLink>
                 </NavItem>

@@ -13,7 +13,26 @@ class ApartmentsController < ApplicationController
         end
     end
     
-    
+    def update
+        apartment = Apartment.find(params[:id])
+        apartment.update(apartment_params)
+        if apartment.valid?
+            render json: apartment
+        else
+            render json: apartment.errors
+        end
+    end
+
+    def destroy
+        apartment=Apartment.find(params[:id])
+        apartment.destroy
+        if apartment.valid?
+            render json: apartment
+        else
+            render json: apartment.errors
+        end
+    end
+
     private
     #  Apartments have: a street designation, a city, state, a manager's name, manager's contact email, monthly rental price, bedrooms, bathrooms, and whether they allow pets
 

@@ -54,7 +54,7 @@ class ApartmentNew extends React.Component {
             sign_in_route = { sign_in_route }
             sign_out_route = { sign_out_route }
           />
-          <Container>
+          <Container >
           <h2>Add A New Apartment</h2>
           <Form>
                 <FormGroup>
@@ -172,7 +172,7 @@ class ApartmentNew extends React.Component {
             </Form>
           </Container>
           <Footer />
-          { this.state.success && <Redirect to = "/index" /> }
+          { this.state.success && <Redirect to = "/myapartments" /> }
         </React.Fragment>
       )
     }

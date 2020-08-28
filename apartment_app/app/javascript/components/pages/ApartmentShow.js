@@ -13,17 +13,17 @@ class ApartmentShow extends React.Component {
     } = this.props
     return (
       <React.Fragment>
-        
         <Header
           logged_in = { logged_in } 
           sign_in_route = { sign_in_route }
           sign_out_route = { sign_out_route }
         />
-        <Container>
-        <h3>{ this.props.apartment.bedrooms } bd / { this.props.apartment.bathrooms } ba Apartment in { this.props.apartment.city }</h3>
+        <div className = "aptNew">
+        <Container className = "p-3">
         <Col sm="6" id="show-body">
           <Card body >
-            <CardTitle><strong>Details</strong></CardTitle>
+       
+            <CardTitle><strong>{ this.props.apartment.bedrooms } bd / { this.props.apartment.bathrooms } ba Apartment in { this.props.apartment.city }</strong></CardTitle>
             <CardText> 
             Street: { this.props.apartment.street }
             <br/>
@@ -46,6 +46,7 @@ class ApartmentShow extends React.Component {
           </Card>
         </Col>
         </Container>
+        </div>
         <Footer />
       </React.Fragment>
     )

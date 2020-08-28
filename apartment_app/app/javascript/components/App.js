@@ -10,6 +10,7 @@ import ApartmentIndex from './pages/ApartmentIndex'
 import ApartmentShow from './pages/ApartmentShow'
 import ApartmentNew from './pages/ApartmentNew'
 import ApartmentEdit from './pages/ApartmentEdit'
+import MyApartment from './pages/MyApartment'
 import NotFound from './pages/NotFound'
 //import mockApts from './mockApartments.js'
 
@@ -53,6 +54,44 @@ createNewApartment = (newApartment) => {
 })
 }
 
+editApartment = (editApartment, id) => {
+  return fetch(`/apartments/${id}`, {
+      // converting an object to a string
+      body: JSON.stringify(editApartment),
+      // specify the info being sent in JSON and the info returning should be JSON
+      headers: {"Content-Type": "application/json"},
+      // HTTP verb so the correct endpoint is invoked on the server
+      method: "PATCH"
+  }).then(response => {
+      // if the response is good  - reload the cats
+      if(response.status === 200){ this.componentDidMount()}
+      return response
+  }).catch(errors => {
+      console.log("edit errors", errors)
+  })
+}
+
+deleteApartment = (id) => {
+  console.log("deletedApartmentID: ", id)
+  return fetch(`/apartments/${id}`, {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "DELETE"
+  })
+  .then(response => {
+    if(response.status === 200){
+      this.componentDidMount()
+    }else {
+      alert("Not successfully deleted")
+  }
+  return response
+    
+  })
+  .catch(errors => {
+    console.log("delete errors:", errors)
+  })
+}
 
   render() {
     const {
@@ -80,7 +119,6 @@ createNewApartment = (newApartment) => {
                 sign_in_route = {sign_in_route}
                 sign_out_route = {sign_out_route} 
                 apartments={ this.state.apartments }
-                title = "All Apartments"
               />
             } 
           />
@@ -97,6 +135,7 @@ createNewApartment = (newApartment) => {
               />)
             }}
           />
+          { logged_in &&
           <Route exact path='/create' 
             render = { (props) =>
               <ApartmentNew 
@@ -108,36 +147,47 @@ createNewApartment = (newApartment) => {
               />
             }  
           />
-          <Route exact path='/myapartments' 
+        }
+          { logged_in &&
+            <Route exact path='/myapartments' 
             render = { (props) => {
               let id = current_user.id
               let myApartments = this.state.apartments.filter(value => value.user_id === id)
               return(   
               <>         
-                <ApartmentIndex 
+                <MyApartment 
                 logged_in = {logged_in}
                 sign_in_route = {sign_in_route}
                 sign_out_route = {sign_out_route} 
                 apartments={ myApartments }
-                title = "My Listed Apartments"
+                deleteApartment = {this.deleteApartment}
               />
               </>
               )} }
-          />
-          <Route exact path='/edit/:id' 
-            render = { (props) => {
-              let id = props.match.params.id
-              let apartment = this.state.apartments.find(value => value.id === parseInt(id))
-              return (
-              <ApartmentEdit 
-                logged_in = {logged_in}
-                sign_in_route = {sign_in_route}
-                sign_out_route = {sign_out_route} 
-                apartment  = {apartment}
-                current_user = {current_user}
-              />)
-            }} 
-          />
+            />
+          }
+          { logged_in &&
+            <Route exact path='/edit/:id' 
+              render = { (props) => {
+                let userid = current_user.id
+                console.log("userid: ", userid)
+                let myApartments = this.state.apartments.filter(value => value.user_id === userid)
+                console.log("myApartments: ", myApartments)
+                let id = props.match.params.id
+                console.log("apartment id: ", id)
+                let apartment = myApartments.find(value => value.id === parseInt(id))
+                console.log("apartment: ", apartment)
+                return (
+                <ApartmentEdit 
+                  logged_in = {logged_in}
+                  sign_in_route = {sign_in_route}
+                  sign_out_route = {sign_out_route} 
+                  apartment  = {apartment}
+                  editApartment = {this.editApartment}
+                />)
+              }} 
+            />
+          }
           <Route
           render = { (props) =>
             <NotFound 

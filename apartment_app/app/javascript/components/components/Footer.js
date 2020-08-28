@@ -7,12 +7,14 @@ class Footer extends React.Component {
   render() {
 
     return (
-      <React.Fragment>
-        <Container className = 'text-center m-2 p-2'>
-        <h5>Footer</h5>
+
+        <Container>
+        <p className = "footer">Apartment App Made by Erica at Learn Academy 🏠</p>
+          
         </Container>
 
-      </React.Fragment>
+
+      
     )
   }
 }

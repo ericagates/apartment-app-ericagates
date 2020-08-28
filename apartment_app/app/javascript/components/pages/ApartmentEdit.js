@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../components/Header.js'
 import Footer from '../components/Footer.js'
-import { Container, Card, CardTitle, CardText, Col } from 'reactstrap'
+import { Container, Card, CardTitle, CardText, Row, Col } from 'reactstrap'
 
 import {Form, FormGroup, Input, Label, Button} from 'reactstrap'
 import { Redirect } from 'react-router-dom'
@@ -24,13 +24,30 @@ class ApartmentEdit extends React.Component {
         success: false
     }
 }  
+
+
+//create a handleChange method
+handleChange = (e) => {
+  let {form} = this.state
+  form[e.target.name] = e.target.value
+  console.log(form)
+  this.setState({form: form})
+}
+
+//create a handleSubmit method
+handleSubmit = (e) => {
+        // keeps react from refreshing the page unnecessarily
+        e.preventDefault()
+        // a function call being passed from App.js
+        this.props.editApartment(this.state.form, this.props.apartment.id)
+  this.setState({success: true})
+}
   
   render() {
       const {
         logged_in,
         sign_in_route,
         sign_out_route,
-        current_user
       } = this.props
       return (
         <React.Fragment>
@@ -150,12 +167,14 @@ class ApartmentEdit extends React.Component {
                 <Button 
                 name="submit"
                 color = "secondary"
+                onClick = {this.handleSubmit}
                 >
                   Submit
                 </Button>
             </Form>
           </Container>
           <Footer />
+          { this.state.success && <Redirect to={ `/show/${this.props.apartment.id}` }/> }
         </React.Fragment>
       )
     }

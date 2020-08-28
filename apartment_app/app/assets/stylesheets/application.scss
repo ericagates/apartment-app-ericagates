@@ -13,4 +13,49 @@
  *= require_tree .
  *= require_self
  */
- @import 'bootstrap'
+ @import 'bootstrap';
+
+ body{
+    background-color: rgb(245, 248, 252);
+ }
+
+ .footer{
+     display:flex;
+     justify-self: center;
+     margin: auto;
+     padding: 2em;
+     text-align: center;
+     width:fit-content;
+     background-color: rgb(245, 248, 252);
+
+ }
+
+ .jumbotron {
+    background-image: image-url("jumbotron_bg-2.jpg");
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .myBackground{
+    background-color:rgba(255, 253,308, 0.7);
+    border-radius: 5px;
+    width:fit-content;
+
+  }
+  .allApts{
+    background-image: image-url("jumbotron_bg.jpg");
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .aptNew{
+    background-image: image-url("jumbotron_bg-3.jpg");
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .myApts{
+    background-image: image-url("jumbotron_bg-4.jpg");
+    background-size: cover;
+    background-position: center center;
+  }

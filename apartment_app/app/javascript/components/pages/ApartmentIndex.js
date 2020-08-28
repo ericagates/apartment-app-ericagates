@@ -18,13 +18,15 @@ class ApartmentIndex extends React.Component {
           sign_in_route = { sign_in_route }
           sign_out_route = { sign_out_route }
         />
-        <Container>
-        <h3>{this.props.title}</h3>
-        <br />
-        <Row id="cards">
+        <div className = "allApts py-3">
+
+        <h3 className = "m-3">All Apartments</h3>
+        <Container >
+        
+        <Row id="cards" xs="1" sm="2" md="3"  className =  'my-auto'>
             { this.props.apartments.map((apartment, index) => {
               return (
-              <Col className = "m-2"key={ index }>
+                <Col  className = "my-2" key={ index }>
                 <Card body >
                   <CardTitle>
                     <h6>{ apartment.bedrooms } bd / { apartment.bathrooms } ba apartment in {apartment.city}, {apartment.state}
@@ -40,6 +42,7 @@ class ApartmentIndex extends React.Component {
 
         </Row>
         </Container>
+        </div>
         <Footer />
       </React.Fragment>
     )
